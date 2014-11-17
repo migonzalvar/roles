@@ -1,6 +1,8 @@
 import unittest
 from roles import RoleType
 
+from six import add_metaclass
+
 
 class A(object):
     def a(self):
@@ -17,8 +19,9 @@ class C(B):
         pass
 
 
+@add_metaclass(RoleType)
 class R(object):
-    __metaclass__ = RoleType
+    pass
 
 
 class U(R):

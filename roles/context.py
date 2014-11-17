@@ -75,9 +75,11 @@ Just like that.
 You can provide additional bindings to be performed:
 
 >>> from role import RoleType
+>>> from six import add_metaclass
 
->>> class SomeRole(object):
-...     __metaclass__ = RoleType
+>>> @add_metaclass(RoleType)
+... class SomeRole(object):
+...     pass
 
 >>> class SomeContext(object):
 ...     def __init__(self, data_object):

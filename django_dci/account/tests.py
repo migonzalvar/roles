@@ -5,6 +5,8 @@ unittest). These will both pass when you run "manage.py test".
 Replace these with more appropriate tests for your application.
 """
 
+from six import add_metaclass
+
 from django.test import TestCase
 from models import Account
 
@@ -12,8 +14,8 @@ from roles.django import ModelRoleType
 from roles.context import context
 
 
+@add_metaclass(ModelRoleType)
 class MoneySource(object):
-    __metaclass__ = ModelRoleType
 
     def transfer(self, amount):
         if self.balance >= amount:
@@ -21,8 +23,8 @@ class MoneySource(object):
             context.sink.receive(amount)
 
 
+@add_metaclass(ModelRoleType)
 class MoneySink(object):
-    __metaclass__ = ModelRoleType
 
     def receive(self, amount):
         self.deposit(amount)

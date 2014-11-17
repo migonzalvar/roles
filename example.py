@@ -5,6 +5,8 @@ Based on the DCI PoC of David Byers and Serge Beaumont
 (see: http://groups.google.com/group/object-composition/files)
 """
 
+from six import add_metaclass
+
 from roles import RoleType, clone
 from roles.context import context
 
@@ -26,16 +28,17 @@ class Account(object):
         self.balance += amount
 
 
+@add_metaclass(RoleType)
 class MoneySource(object):
-    __metaclass__ = RoleType
 
     def transfer(self, amount):
         if self.balance >= amount:
             self.withdraw(amount)
             context.sink.receive(amount)
 
+
+@add_metaclass(RoleType)
 class MoneySink(object):
-    __metaclass__ = RoleType
 
     def receive(self, amount):
         self.deposit(amount)

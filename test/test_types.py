@@ -3,9 +3,11 @@
 import unittest
 from roles import RoleType, clone
 
+from six import add_metaclass, PY3
 
+
+@add_metaclass(RoleType)
 class SimpleRole(object):
-    __metaclass__ = RoleType
     __slots__ = ()
 
     def inrole(self):
@@ -45,7 +47,10 @@ class TypesTest(unittest.TestCase):
         try:
             SimpleRole(c)
         except TypeError as e:
-            self.assertEquals("__class__ assignment: 'Cls' object layout differs from 'Cls+SimpleRole'", str(e))
+            if PY3:
+                self.assertEquals("__class__ assignment: 'Cls+SimpleRole' object layout differs from 'Cls'", str(e))
+            else:
+                self.assertEquals("__class__ assignment: 'Cls' object layout differs from 'Cls+SimpleRole'", str(e))
         else:
             assert False, "should not be reached"
 
@@ -128,8 +133,9 @@ class TypesTest(unittest.TestCase):
         Point = namedtuple('Point', 'x y')
         p = Point(1, 2)
 
+        @add_metaclass(RoleType)
         class Vector(object):
-            __metaclass__ = RoleType
+            pass
             #def m(self):
             #    "Manhattan style distance calculation"
             #    return p.x + p.y
@@ -139,7 +145,10 @@ class TypesTest(unittest.TestCase):
         try:
             Vector(p)
         except TypeError as e:
-            self.assertEquals("__class__ assignment: 'Point' object layout differs from 'Point+Vector'", str(e))
+            if PY3:
+                self.assertEquals("__class__ assignment: 'Point+Vector' object layout differs from 'Point'", str(e))
+            else:
+                self.assertEqual("__class__ assignment: 'Point' object layout differs from 'Point+Vector'", str(e))
 #        except AttributeError as e:
 #            self.assertEquals("'Point' object has no attribute '__dict__'", str(e))
         else:

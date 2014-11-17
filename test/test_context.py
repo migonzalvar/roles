@@ -2,6 +2,8 @@
 from roles import RoleType
 from roles.context import context, in_context
 
+from six import add_metaclass
+
 
 class Account(object):
 
@@ -19,8 +21,8 @@ class Account(object):
         self.balance += amount
 
 
+@add_metaclass(RoleType)
 class MoneySource(object):
-    __metaclass__ = RoleType
 
     def transfer(self, amount):
         if self.balance >= amount:
@@ -28,8 +30,8 @@ class MoneySource(object):
             context.to_account.receive(amount)
 
 
+@add_metaclass(RoleType)
 class MoneySink(object):
-    __metaclass__ = RoleType
 
     def receive(self, amount):
         self.deposit(amount)

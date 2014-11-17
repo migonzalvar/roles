@@ -31,8 +31,9 @@ The instance should participate in a collaboration in which it fulfills a
 particular role:
 
 >>> from roles import RoleType
->>> class Carpenter(object):
-...     __metaclass__ = RoleType
+>>> from six import add_metaclass
+>>> @add_metaclass(RoleType)
+... class Carpenter(object):
 ...     def chop(self):
 ...          return "chop, chop"
 

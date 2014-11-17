@@ -80,8 +80,11 @@ def assignto(cls):
 
     And a role:
 
-    >>> class MyRole(object):
-    ...     __metaclass__ = RoleType
+    >>> from six import add_metaclass
+
+    >>> @add_metaclass(RoleType)
+    ... class MyRole(object):
+    ...     pass
 
     You can provide implementations for several roles like this:
 
@@ -117,8 +120,9 @@ def assignto(cls):
     You can also apply the decorator to the root role directly:
 
     >>> @assignto(A)
+    ... @add_metaclass(RoleType)
     ... class AnyRole(object):
-    ...     __metaclass__ = RoleType
+    ...     pass
 
     >>> a = A()
     >>> AnyRole(a)            # doctest: +ELLIPSIS

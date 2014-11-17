@@ -22,8 +22,9 @@ def instance(rolecls, subj):
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
     ...     def am(self): print(self.name, 'is')
-    >>> class Biker(object):
-    ...     __metaclass__ = RoleType
+    >>> from six import add_metaclass
+    >>> @add_metaclass(RoleType)
+    ... class Biker(object):
     ...     def bike(self): print(self.name, 'bikes')
     ...
 
@@ -50,8 +51,9 @@ def clone(rolecls, subj):
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
     ...     def am(self): print(self.name, 'is')
-    >>> class Biker(object):
-    ...     __metaclass__ = RoleType
+    >>> from six import add_metaclass
+    >>> @add_metaclass(RoleType)
+    ... class Biker(object):
     ...     def bike(self): print(self.name, 'bikes')
     ...
     >>> person = Person('Joe')
@@ -93,9 +95,10 @@ def adapter(rolecls, subj):
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
     ...     def am(self): print(self.name, 'is')
-    >>> class Biker(object):
-    ...     __metaclass__ = RoleType
-    ...     def bike(self): print self.name, 'bikes'
+    >>> from six import add_metaclass
+    >>> @add_metaclass(RoleType)
+    ... class Biker(object):
+    ...     def bike(self): print(self.name, 'bikes')
     ...
     >>> person = Person('Joe')
     >>> biker = Biker(person, method=adapter)
@@ -205,11 +208,12 @@ class RoleType(type):
     Apart from that a few roles can be defined. Simple objects with a default
     ``__init__()`` (no arguments) and the ``RoleType`` as metaclass:
 
-    >>> class Carpenter(object):
-    ...     __metaclass__ = RoleType
+    >>> from six import add_metaclass
+    >>> @add_metaclass(RoleType)
+    ... class Carpenter(object):
     ...     def chop(self): print(self.name, 'chops')
-    >>> class Biker(object):
-    ...     __metaclass__ = RoleType
+    >>> @add_metaclass(RoleType)
+    ... class Biker(object):
     ...     def bike(self): print(self.name, 'bikes')
 
     Now, by default an object has no roles (in this case our person).
@@ -276,8 +280,8 @@ class RoleType(type):
 
     Roles do not allow for overriding methods.
 
-    >>> class Incognito(object):
-    ...     __metaclass__ = RoleType
+    >>> @add_metaclass(RoleType)
+    ... class Incognito(object):
     ...     def am(self): return 'under cover'
     >>> Incognito(Person)                # doctest: +ELLIPSIS
     Traceback (most recent call last):
@@ -400,8 +404,9 @@ class RoleType(type):
         """
         Shorthand for using roles in with statements
 
-        >>> class Biker(object):
-        ...     __metaclass__ = RoleType
+        >>> from six import add_metaclass
+        >>> @add_metaclass(RoleType)
+        ... class Biker(object):
         ...     def bike(self): return 'bike, bike'
         >>> class Person(object):
         ...     pass
