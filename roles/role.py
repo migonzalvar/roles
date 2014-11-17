@@ -139,8 +139,8 @@ def cached(func):
 
     Show cache contents:
 
-    >>> cap.cache
-    {('a',): 'A', ('b',): 'B'}
+    >>> cap.cache == {('a',): 'A', ('b',): 'B'}
+    True
 
     Clear the cache:
 
