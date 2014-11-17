@@ -7,6 +7,8 @@ from __future__ import absolute_import
 from functools import wraps
 import threading
 
+from six import iteritems
+
 
 __all__ = ['context', 'in_context']
 
@@ -24,14 +26,14 @@ class ManagedContext(object):
         """
         ctx = self.ctx
         self.stack.append(self.ctx)
-        for var, role in self.bindings.iteritems():
+        for var, role in iteritems(self.bindings):
             role.assign(getattr(ctx, var))
         return ctx
 
     def __exit__(self, exc_type, exc_value, traceback):
         ctx = self.stack.pop()
         assert ctx is self.ctx
-        for var, role in self.bindings.iteritems():
+        for var, role in iteritems(self.bindings):
             role.revoke(getattr(ctx, var))
 
 
