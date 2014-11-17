@@ -26,6 +26,7 @@ setup(
     url='http://github.com/amolenaar/roles',
     license="BSD License",
     packages = [ 'roles' ],
+    install_requires=['six'],
     keywords="role DCI data context interaction",
     platforms=["All"],
     classifiers=['Development Status :: 4 - Beta',
