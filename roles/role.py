@@ -8,7 +8,7 @@ Inspired by the DCI PoC of David Byers and Serge Beaumont
 (see: http://groups.google.com/group/object-composition/files)
 """
 
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
 
 from operator import attrgetter
 from contextlib import contextmanager
@@ -21,11 +21,12 @@ def instance(rolecls, subj):
 
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
-    ...     def am(self): print self.name, 'is'
+    ...     def am(self): print(self.name, 'is')
     >>> class Biker(object):
     ...     __metaclass__ = RoleType
-    ...     def bike(self): print self.name, 'bikes'
+    ...     def bike(self): print(self.name, 'bikes')
     ...
+
     >>> person = Person('Joe')
     >>> biker = Biker(person, method=instance)
     >>> biker # doctest: +ELLIPSIS
@@ -48,10 +49,10 @@ def clone(rolecls, subj):
 
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
-    ...     def am(self): print self.name, 'is'
+    ...     def am(self): print(self.name, 'is')
     >>> class Biker(object):
     ...     __metaclass__ = RoleType
-    ...     def bike(self): print self.name, 'bikes'
+    ...     def bike(self): print(self.name, 'bikes')
     ...
     >>> person = Person('Joe')
     >>> biker = Biker(person, method=clone)
@@ -91,7 +92,7 @@ def adapter(rolecls, subj):
 
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
-    ...     def am(self): print self.name, 'is'
+    ...     def am(self): print(self.name, 'is')
     >>> class Biker(object):
     ...     __metaclass__ = RoleType
     ...     def bike(self): print self.name, 'bikes'
@@ -199,17 +200,17 @@ class RoleType(type):
 
     >>> class Person(object):
     ...     def __init__(self, name): self.name = name
-    ...     def am(self): print self.name, 'is'
+    ...     def am(self): print(self.name, 'is')
 
     Apart from that a few roles can be defined. Simple objects with a default
     ``__init__()`` (no arguments) and the ``RoleType`` as metaclass:
 
     >>> class Carpenter(object):
     ...     __metaclass__ = RoleType
-    ...     def chop(self): print self.name, 'chops'
+    ...     def chop(self): print(self.name, 'chops')
     >>> class Biker(object):
     ...     __metaclass__ = RoleType
-    ...     def bike(self): print self.name, 'bikes'
+    ...     def bike(self): print(self.name, 'bikes')
 
     Now, by default an object has no roles (in this case our person).
 

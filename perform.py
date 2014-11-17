@@ -59,14 +59,14 @@ class Adapter(object):
 component.provideAdapter(Adapter)
 """
 
-print 'Construction of object				%2.3fs' % timeit('a=A()', setup=setup_role)
-print 'Construction of roles				%2.3fs' % timeit('a=A();Role(a).func()', setup=setup_role)
-print 'Construction of roles in context		%2.3fs' % timeit('a=A()\nwith Role.played_by(a): a.func()', setup=setup_role)
+print('Construction of object				%2.3fs' % timeit('a=A()', setup=setup_role))
+print('Construction of roles				%2.3fs' % timeit('a=A();Role(a).func()', setup=setup_role))
+print('Construction of roles in context		%2.3fs' % timeit('a=A()\nwith Role.played_by(a): a.func()', setup=setup_role))
 
-print 'Construction of roles from factory		%2.3fs' % timeit('a=A();Role(a).func()', setup=setup_rolefactory)
-print 'Construction of roles from factory in context	%.3fs' % timeit('a=A()\nwith Role.played_by(a): a.func()', setup=setup_rolefactory)
+print('Construction of roles from factory		%2.3fs' % timeit('a=A();Role(a).func()', setup=setup_rolefactory))
+print('Construction of roles from factory in context	%.3fs' % timeit('a=A()\nwith Role.played_by(a): a.func()', setup=setup_rolefactory))
 
-print 'Construction of zope adapters			%.3fs' % timeit('a=A();b=Iface(a);b.func()', setup=setup_zope)
+print('Construction of zope adapters			%.3fs' % timeit('a=A();b=Iface(a);b.func()', setup=setup_zope))
 
 
 def profile():

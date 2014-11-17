@@ -42,9 +42,9 @@ class TransferMoney(object):
                     MoneySource.played_by(self.source),\
                     MoneySink.played_by(self.sink):
             self.source.transfer(amount)
-            print "We can still access the original attributes", self.sink.balance
-            print "Is it still an Account?", isinstance(self.sink, Account)
-            #print "Object equality?", dst == self.sink
+            print("We can still access the original attributes", self.sink.balance)
+            print("Is it still an Account?", isinstance(self.sink, Account))
+            #print("Object equality?", dst == self.sink)
             self.source.save()
             self.sink.save()
 
@@ -68,9 +68,9 @@ class MoneyTransferTest(TestCase):
 
         ctx.transfer_money(amount=100)
 
-        print src, src.balance
+        print(src, src.balance)
         assert src.balance == 900
-        print dst, dst.balance
+        print(dst, dst.balance)
         assert dst.balance == 100
 
         accounts = Account.objects.all()
