@@ -130,7 +130,7 @@ def assignto(cls):
     Now some other class should not be assigned this role:
 
     >>> class X(object): pass
-    >>> AnyRole(X())          # doctest: +ELLIPSIS
+    >>> AnyRole(X())          # doctest: +ELLIPSIS +IGNORE_EXCEPTION_DETAIL
     Traceback (most recent call last):
       ...
     NoRoleError: No role found for <class 'roles.factory.X'>
@@ -144,7 +144,7 @@ def assignto(cls):
 
     >>> @assignto(A)
     ... class NotARole(object):
-    ...     pass
+    ...     pass  # doctest: +IGNORE_EXCEPTION_DETAIL
     Traceback (most recent call last):
       ...
     NotARoleError: Could not apply @assignto() to class <class 'roles.factory.NotARole'>: not a role
