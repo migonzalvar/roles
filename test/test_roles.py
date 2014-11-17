@@ -114,7 +114,7 @@ class TraitTestCase(unittest.TestCase):
         try:
             with U.played_by(c):
                 pass  # okay
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals('Can not apply role when overriding methods: b', str(e))
         else:
             self.fail('should not pass')
@@ -132,7 +132,7 @@ class TraitTestCase(unittest.TestCase):
         try:
             with U.played_by(a):
                 pass  # okay
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals('Can not apply role when overriding methods: b', str(e))
         else:
             self.fail('should not pass')

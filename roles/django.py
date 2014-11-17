@@ -6,7 +6,7 @@ from __future__ import absolute_import
 
 try:
     from django.db.models.base import ModelBase
-except ImportError, e:
+except ImportError as e:
     import logging
     logging.warning('Django could not be imported: %s' % str(e))
 else:

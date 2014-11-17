@@ -44,7 +44,7 @@ class TypesTest(unittest.TestCase):
         c = Cls()
         try:
             SimpleRole(c)
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals("__class__ assignment: 'Cls' object layout differs from 'Cls+SimpleRole'", str(e))
         else:
             assert False, "should not be reached"
@@ -53,7 +53,7 @@ class TypesTest(unittest.TestCase):
         d = dict()
         try:
             SimpleRole(d)
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals("__class__ assignment: only for heap types", str(e))
         else:
             assert False, "should not be reached"
@@ -72,7 +72,7 @@ class TypesTest(unittest.TestCase):
         d = ['a', 'b']
         try:
             SimpleRole(d)
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals("__class__ assignment: only for heap types", str(e))
         else:
             assert False, "should not be reached"
@@ -90,7 +90,7 @@ class TypesTest(unittest.TestCase):
         d = ('a', 'b')
         try:
             SimpleRole(d)
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals("__class__ assignment: only for heap types", str(e))
         else:
             assert False, "should not be reached"
@@ -113,7 +113,7 @@ class TypesTest(unittest.TestCase):
         d = UserDict()
         try:
             SimpleRole(d)
-        except AttributeError, e:
+        except AttributeError as e:
             self.assertEquals("class UserDict has no attribute '__mro__'", str(e))
         else:
             assert False, "should not be reached"
@@ -138,9 +138,9 @@ class TypesTest(unittest.TestCase):
 
         try:
             Vector(p)
-        except TypeError, e:
+        except TypeError as e:
             self.assertEquals("__class__ assignment: 'Point' object layout differs from 'Point+Vector'", str(e))
-#        except AttributeError, e:
+#        except AttributeError as e:
 #            self.assertEquals("'Point' object has no attribute '__dict__'", str(e))
         else:
             assert False, "should not be reached"
